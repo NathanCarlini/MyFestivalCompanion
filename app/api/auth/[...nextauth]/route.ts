@@ -10,14 +10,14 @@ import NextAuth, { AuthOptions, Session, User, JWT } from "next-auth";
 //       clientId: process.env.GOOGLE_CLIENT_ID!,
 //       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
 //     }),
-//     // AppleProvider({
-//     //   clientId: process.env.APPLE_CLIENT_ID!,
-//     //   clientSecret: process.env.APPLE_CLIENT_SECRET!,
-//     // }),
-//     // FacebookProvider({
-//     //   clientId: process.env.FACEBOOK_CLIENT_ID!,
-//     //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
-//     // }),
+//     AppleProvider({
+//       clientId: process.env.APPLE_CLIENT_ID!,
+//       clientSecret: process.env.APPLE_CLIENT_SECRET!,
+//     }),
+//     FacebookProvider({
+//       clientId: process.env.FACEBOOK_CLIENT_ID!,
+//       clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+//     }),
 //     EmailProvider({
 //       server: {
 //         host: process.env.EMAIL_SERVER_HOST,
@@ -70,7 +70,6 @@ import NextAuth, { AuthOptions, Session, User, JWT } from "next-auth";
 // export { handler as GET, handler as POST };
 
 // app/api/auth/[...nextauth]/route.ts
-
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -80,6 +79,10 @@ const handler = NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
+    async signIn({ user}) {
+      console.log("Utilisateur:", user);
+      return true;
+    },
     async session({ session, token }) {
       session.accessToken = token.accessToken;
       return session;
@@ -92,9 +95,10 @@ const handler = NextAuth({
     },
   },
   pages: {
-    signIn: '/auth/signin',
+    signIn: "/auth/signin",
   },
 });
 
-export { handler as GET, handler as POST };
 
+
+export { handler as GET, handler as POST };
