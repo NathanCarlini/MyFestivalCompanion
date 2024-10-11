@@ -1,20 +1,19 @@
-// app/protected/page.tsx
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
+"use client"
+import { useSession } from 'next-auth/react';
 
-import { cookies } from 'next/headers';
+const UserProfile = () => {
+  const { data: session } = useSession();
 
-export default async function ProtectedPage() {
-  const cookieStore = cookies()
-  const cookieSession = cookieStore.get('next-auth.session-token');
-  // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
-  if (!cookieSession) {
-    redirect('/auth/signin');
+  if (session) {
+    return (
+      <div>
+        <h1>Bienvenue, {session.user?.name}</h1>
+        <p>Email: {session.user?.email}</p>
+      </div>
+    );
   }
-  return (
-    <div>
-      <h1>Protected Page</h1>
-      <p>Welcome, you are authenticated!</p>
-    </div>
-  );
-}
+
+  return <p>Vous n'êtes pas connecté.</p>;
+};
+
+export default UserProfile;
