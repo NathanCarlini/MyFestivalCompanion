@@ -1,0 +1,17 @@
+import { DateTime } from "next-auth/providers/kakao"
+
+export default class User {
+    readonly timesampmodification : Date;
+    iduser! : number;
+    name! : string;
+    email! : string;
+    creationdate! : DateTime;
+    deletiondate! : DateTime;
+    editdate! : DateTime;
+    isverified! : boolean;
+    imageprofil! : string
+
+    constructor(){
+        this.timesampmodification = new Date();
+    }
+}
