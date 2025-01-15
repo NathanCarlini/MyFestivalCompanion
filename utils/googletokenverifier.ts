@@ -10,13 +10,13 @@ const verifyGoogleToken = async (token: string) => {
     const payload = ticket.getPayload();
 
     if (payload) {
-      console.log("Token validé avec succès:", payload);
+      console.log("Token validated :", payload);
       return payload;
     } else {
-      throw new Error("Échec de la validation du token");
+      throw new Error("Error while validating");
     }
   } catch (error) {
-    console.error("Erreur lors de la vérification du token:", error);
+    console.error("Error while validating :", error);
     return null;
   }
 };
