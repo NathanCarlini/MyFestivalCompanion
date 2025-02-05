@@ -1,16 +1,24 @@
 import "./globals.css";
 // import { SessionProvider } from 'next-auth/react';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import NextAuthProvider from "./nextprovider";
+import { ReactNode } from "react";
+
 type Props = {
   children: ReactNode;
 };
 
-function RootLayout({ children }: Props) {
+async function RootLayout({ children }: Props) {
   return (
     <html>
-      <NextAuthProvider>
-        <body>{children}</body>
-      </NextAuthProvider>
+      <body>
+        <Header />
+        <NextAuthProvider>
+          {children}
+        </NextAuthProvider>
+        <Footer />
+      </body>
     </html>
   );
 }
