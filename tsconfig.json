@@ -29,6 +29,6 @@
     "src/types/**/*.ts",
     ".next/types/**/*.ts",
     "src/app/feedback"
-  ],
+, "app/api/Worker/route.ts"  ],
   "exclude": ["node_modules"]
 }

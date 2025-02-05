@@ -9,9 +9,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'MainColor': "#375460",
+        'SecColor': "#6498ad",
+        'ThirdColor': "#2a474e",
       },
+      height:{
+        'headerSize': '4rem',
+        'footerSize': '8rem',
+        'iconSize': '2.5rem',
+      },
+      backgroundImage:{
+        'MachineHead' : "url('/assets/Rectangle3.png')",
+        'Music' : "url('/assets/Music.png')",
+        'Multi' : "url('/assets/Multi.png')",
+        'Books' : "url('/assets/Books.png')",
+        'Clown' : "url('/assets/Clown.png')",
+        'Cinema' : "url('/assets/Cinema.png')",
+        'VisArt' : "url('/assets/VisArt.png')",
+      }
     },
   },
   plugins: [],
