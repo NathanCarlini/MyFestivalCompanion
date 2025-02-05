@@ -1,7 +1,8 @@
 import connection from "@/db/db";
-import ArticleToSend from "@/Objects/ArticleToSend";
-import User from "@/Objects/User";
+import ArticleToSend from "@/app/Objects/ArticleToSend";
+import User from "@/app/Objects/User";
 import { verifyGoogleToken } from "next-auth";
+import NowDate from "@/app/Objects/Date";
 
 export async function postarticle(
   articleContent: ArticleToSend,
@@ -13,7 +14,7 @@ export async function postarticle(
     currentUser.iduser,
     articleContent.title,
     articleContent.text,
-    new Date().toDateString()
+    new NowDate().fulldate
   );
   const table = "article";
   const query = `INSERT INTO ${table} (${Object.keys(ArticleToSend).join(

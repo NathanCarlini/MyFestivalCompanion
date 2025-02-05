@@ -2,8 +2,9 @@ import GoogleProvider from "next-auth/providers/google";
 import AppleProvider from "next-auth/providers/apple";
 import FacebookProvider from "next-auth/providers/facebook";
 import EmailProvider from "next-auth/providers/email";
-import NextAuth, { AuthOptions, Session, User, JWT } from "next-auth";
-
+import NextAuth, { AuthOptions, User, JWT } from "next-auth";
+import { SessionProvider } from "next-auth/react";
+import { Session } from "next-auth";
 // const authOptions = {
 //   providers: [
 //     GoogleProvider({
@@ -69,7 +70,12 @@ import NextAuth, { AuthOptions, Session, User, JWT } from "next-auth";
 // const handler = NextAuth(authOptions);
 // export { handler as GET, handler as POST };
 
-// app/api/auth/[...nextauth]/route.ts
+declare module "next-auth" {
+  interface Session {
+    accessToken?: string;
+  }
+}
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -84,7 +90,9 @@ const handler = NextAuth({
       return true;
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken;
+      if (session.accessToken) {
+        session.accessToken = token.accessToken as string;
+      }
       return session;
     },
     async jwt({ token, user, account }) {
